@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hash User Info</title>
+</head>
+<body>
+  <h1>Enter User Info</h1>
+  <form id="hashForm" action="/hash" method="post">
+    <label for="userid">User ID:</label>
+    <input type="text" id="userid" name="userid" required><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    <button type="submit">Hash and Submit</button>
+  </form>
+  <script>
+    document.getElementById('hashForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const response = await fetch('/hash', {
+        method: 'POST',
+        body: new URLSearchParams(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // You can use this data to redirect or send to n8n
+        // For example, redirect to a success page with query params
+        window.location.href = `/success?userid=${encodeURIComponent(data.userid)}&hashedPassword=${encodeURIComponent(data.hashedPassword)}`;
+      } else {
+        alert('Error hashing data.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+</head>
+<body>
+    <h1>Data Hashed Successfully</h1>
+    <p>User ID: <span id="userid"></span></p>
+    <p>Hashed Password: <span id="hashedPassword"></span></p>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('userid').textContent = urlParams.get('userid');
+        document.getElementById('hashedPassword').textContent = urlParams.get('hashedPassword');
+    </script>
+</body>
+</html>
